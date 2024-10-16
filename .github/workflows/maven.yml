@@ -21,18 +21,19 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-
-      # Install Maven manually by downloading from the official source
       - name: Install Maven
         run: |
           MAVEN_VERSION=3.9.4
           wget https://archive.apache.org/dist/maven/maven-3/$MAVEN_VERSION/binaries/apache-maven-$MAVEN_VERSION-bin.tar.gz
           tar -xvzf apache-maven-$MAVEN_VERSION-bin.tar.gz
           sudo mv apache-maven-$MAVEN_VERSION /opt/maven
-          echo "Maven installed at /opt/maven"
 
-          # Add Maven to the PATH
-          echo "export PATH=/opt/maven/bin:$PATH" >> $GITHUB_ENV
+          # Add Maven to the PATH for the current session by updating the $GITHUB_ENV file
+          echo "Maven installed at /opt/maven"
+          echo "PATH=/opt/maven/bin:\$PATH" >> $GITHUB_ENV
+
+      - name: Verify Maven Installation
+        run: mvn -v
 
       # Set up JDK 17
       - name: Set up JDK 17
