@@ -31,7 +31,7 @@ jobs:
 
           # Append Maven to the PATH for the current session
           echo "Maven installed at /opt/maven"
-          echo "PATH=\$PATH:/opt/maven/bin" >> $GITHUB_ENV
+          echo "PATH=$PATH:/opt/maven/bin" >> $GITHUB_ENV
 
       - name: Verify Maven Installation
         run: mvn -v
